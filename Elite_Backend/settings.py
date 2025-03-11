@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,15 +33,23 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts',
+    'rest_framework',  
+    'rest_framework.authtoken',  
+    'corsheaders',  
+    'rest_framework_simplejwt.token_blacklist',  
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -99,6 +109,51 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+# Simple JSON Web Token Authentication Settings
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=5),
+    "UPDATE_LAST_LOGIN": True,
+}
+
+CSRF_COOKIE_HTTPONLY = False  # Allows the frontend to access the CSRF token
+
+# django-cors-headers settings
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+    "http://localhost:8000",
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://127.0.0.1:8000",
+
+]
+
+JAZZMIN_SETTINGS ={
+    "site_brand": "Elite_Explorers.com",
+     "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+    "topmenu_links": [
+
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+
+        {"name": "Download Invoices", "url": "http://localhost:5173/booking-invoice/", "new_window": True},
+
+        {"name": "Website Home", "url": "http://localhost:5173/home/", "new_window": True},
+
+        {"app": "Service_provider"},
+    ],
+    "copyright": "Elite_Explorers.com",
+    "welcome_sign": "Elite_Explorers.com"
+     
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
