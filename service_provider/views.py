@@ -1,6 +1,14 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import ServiceCategory, ServiceProvider, ServiceListing, ServiceImage
+from rest_framework import viewsets
+from .serializers import ServiceImageSerializer
+
+class ServiceImageViewSet(viewsets.ReadOnlyModelViewSet):
+    """API endpoint to retrieve service images."""
+    queryset = ServiceImage.objects.all()
+    serializer_class = ServiceImageSerializer
+
 
 
 def list_categories(request):

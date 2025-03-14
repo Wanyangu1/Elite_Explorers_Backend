@@ -145,7 +145,7 @@ JAZZMIN_SETTINGS ={
 
         {"name": "Download Invoices", "url": "http://localhost:5173/booking-invoice/", "new_window": True},
 
-        {"name": "Website Home", "url": "http://localhost:5173/home/", "new_window": True},
+        {"name": "Website Home", "url": "http://localhost:5173/", "new_window": True},
 
         {"app": "Service_provider"},
     ],
@@ -170,6 +170,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+# Media settings
+
+MEDIA_URL = "media/"
+
+MEDIA_ROOT = BASE_DIR / "media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

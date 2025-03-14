@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import ServiceCategory, ServiceProvider, ServiceListing, ServiceImage
+from rest_framework import serializers
 
 
 class ServiceCategorySerializer(serializers.ModelSerializer):
@@ -18,13 +19,17 @@ class ServiceProviderSerializer(serializers.ModelSerializer):
         fields = ["id", "user", "business_name", "description", "phone", "email", "address", "website", "verified"]
         read_only_fields = ["verified"]  # Service providers cannot verify themselves
 
-
 class ServiceImageSerializer(serializers.ModelSerializer):
-    """Serializer for service listing images."""
+    image_url = serializers.SerializerMethodField()
 
     class Meta:
         model = ServiceImage
-        fields = ["id", "service", "image"]
+        fields = ["id", "service", "image_url"]
+
+    def get_image_url(self, obj):
+        request = self.context.get("request")
+        return request.build_absolute_uri(obj.image.url) if obj.image else None
+
 
 
 class ServiceListingSerializer(serializers.ModelSerializer):
