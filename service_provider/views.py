@@ -33,6 +33,7 @@ def list_services(request):
         data.append({
             "id": service.id,
             "title": service.title,
+            "description": service.description,
             "category": service.category.name if service.category else None,
             "provider": service.provider.business_name,
             "price": str(service.price),
@@ -52,6 +53,7 @@ def service_detail(request, service_id):
     data = {
         "id": service.id,
         "title": service.title,
+        "description": service.description,
         "category": service.category.name if service.category else None,
         "provider": service.provider.business_name,
         "price": str(service.price),
