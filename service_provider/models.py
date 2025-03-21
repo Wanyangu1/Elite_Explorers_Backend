@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
-
+from django.conf import settings
 
 class ServiceCategory(models.Model):
     """Defines categories such as Hotels, Rentals, Tours, etc."""
@@ -13,7 +12,7 @@ class ServiceCategory(models.Model):
 
 class ServiceProvider(models.Model):
     """Stores information about businesses or individuals providing services."""
-    user = models.OneToOneField(User, on_delete=models.CASCADE)  # Links to Django's auth system
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     business_name = models.CharField(max_length=255)
     description = models.TextField()
     phone = models.CharField(max_length=15, blank=True)
