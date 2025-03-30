@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'corsheaders',  
     'rest_framework_simplejwt.token_blacklist',  
     'django_extensions',
-    'service_provider'
+    'service_provider',
+    'Booking',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
