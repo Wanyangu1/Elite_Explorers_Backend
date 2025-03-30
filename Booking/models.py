@@ -1,8 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 class Booking(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)  # Optional user field
     service_title = models.CharField(max_length=255)
     category = models.CharField(max_length=255)
     description = models.TextField()
