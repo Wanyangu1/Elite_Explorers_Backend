@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'service_provider',
     'Booking',
     'django.contrib.sites',
+    "import_export",
 ]
 
 MIDDLEWARE = [
