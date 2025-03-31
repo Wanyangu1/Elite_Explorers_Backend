@@ -2,8 +2,8 @@ from rest_framework import serializers
 from .models import Booking
 
 class BookingSerializer(serializers.ModelSerializer):
-    service_title = serializers.CharField(allow_blank=False, allow_null=False)
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())  # Automatically set the logged-in user
+
     class Meta:
         model = Booking
-        exclude = ['user']  # ✅ This prevents the API from requiring a user
-
+        fields = '__all__'  # Include all fields
