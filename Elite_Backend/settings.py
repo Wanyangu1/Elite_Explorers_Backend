@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'service_provider',
     'Booking',
-    'django.contrib.sites',
+    #'django.contrib.sites',
+    'PropertyToList',
     "import_export",
 ]
 

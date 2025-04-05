@@ -1,13 +1,18 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from .models import ServiceCategory, ServiceProvider, ServiceListing, ServiceImage
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions
 from .serializers import ServiceImageSerializer
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from rest_framework import generics
+from .models import ServiceProvider
+from .serializers import ServiceProviderSerializer
 
-class ServiceImageViewSet(viewsets.ReadOnlyModelViewSet):
-    """API endpoint to retrieve service images."""
+class ServiceImageViewSet(viewsets.ModelViewSet):
     queryset = ServiceImage.objects.all()
     serializer_class = ServiceImageSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 
@@ -63,3 +68,11 @@ def service_detail(request, service_id):
     }
     
     return JsonResponse(data)
+
+class CreateServiceProviderView(generics.CreateAPIView):
+    queryset = ServiceProvider.objects.all()
+    serializer_class = ServiceProviderSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
