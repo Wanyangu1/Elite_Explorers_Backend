@@ -25,6 +25,7 @@ urlpatterns = [
     path("api/services/", include("service_provider.urls")), 
     path("api/bookings/", include("Booking.urls")), 
     path('api/PropertyList/', include('PropertyToList.urls')), 
+    path('api/flights/', include('Flights.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

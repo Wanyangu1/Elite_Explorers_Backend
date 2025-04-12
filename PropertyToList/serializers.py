@@ -8,7 +8,7 @@ class ServiceImageSerializer(serializers.ModelSerializer):
 
 class ServiceSubmissionSerializer(serializers.ModelSerializer):
     # Nested serializer for service images
-    service_images = ServiceImageSerializer(many=True, read_only=True)
+    service_images = ServiceImageSerializer(many=True, required=False)
     
     class Meta:
         model = ServiceSubmission
